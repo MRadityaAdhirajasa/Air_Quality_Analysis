@@ -243,6 +243,11 @@ st.pyplot(fig2)
 # Informasi Tambahan
 st.subheader("Keterangan")
 st.markdown("""
+#### PM2.5
+- **Tinggi**: PM2.5 >= 80  
+- **Sedang**: 60 <= PM2.5 < 80  
+- **Rendah**: PM2.5 < 60
+#### Emisi
 - **Tinggi**: NO2 > 0.7 atau CO > 0.7  
 - **Sedang**: NO2 > 0.4 atau CO > 0.4  
 - **Rendah**: NO2 <= 0.4 dan CO <= 0.4
