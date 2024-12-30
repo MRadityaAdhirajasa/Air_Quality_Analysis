@@ -206,6 +206,28 @@ def classify_station(row):
 
 scaled_emisi['Kategori'] = scaled_emisi.apply(classify_station, axis=1)
 
+# Menampilkan stasiun dengan NO2 & CO terendah dan tertinggi
+if not scaled_emisi.empty:
+    # Stasiun dengan NO2 tertinggi dan terendah
+    max_no2_station = scaled_emisi.loc[scaled_emisi['NO2'].idxmax(), 'station']
+    max_no2_value = scaled_emisi['NO2'].max()
+    min_no2_station = scaled_emisi.loc[scaled_emisi['NO2'].idxmin(), 'station']
+    min_no2_value = scaled_emisi['NO2'].min()
+    
+    # Stasiun dengan CO tertinggi dan terendah
+    max_co_station = scaled_emisi.loc[scaled_emisi['CO'].idxmax(), 'station']
+    max_co_value = scaled_emisi['CO'].max()
+    min_co_station = scaled_emisi.loc[scaled_emisi['CO'].idxmin(), 'station']
+    min_co_value = scaled_emisi['CO'].min()
+
+    # Menampilkan informasi
+    st.markdown(f"""
+    - #### Stasiun dengan Emisi Tertinggi: {max_no2_station} & {max_co_station}
+    - #### Stasiun dengan Emisi Terendah: {min_no2_station} & {min_co_station}
+    """)
+else:
+    st.write("Tidak ada data emisi yang tersedia untuk ditampilkan.")
+
 # Visualisasi Heatmap
 st.subheader(f"Heatmap Tingkat NO2 dan CO per Stasiun {year_filter} (Jam Sibuk)")
 fig1, ax1 = plt.subplots(figsize=(12, 6))
@@ -221,7 +243,7 @@ ax1.set_ylabel('Stations')
 st.pyplot(fig1)
 
 # Visualisasi Scatter Plot
-category_colors = {'Rendah': 'blue', 'Sedang': 'orange', 'Tinggi': 'red'}
+category_colors_emition = {'Rendah': 'blue', 'Sedang': 'orange', 'Tinggi': 'red'}
 st.subheader(f"Scatter Plot NO2 vs CO {year_filter} (Jam Sibuk)")
 fig2, ax2 = plt.subplots(figsize=(10, 6))
 sns.scatterplot(
@@ -232,13 +254,25 @@ sns.scatterplot(
     style='Kategori', 
     s=100, 
     ax=ax2,
-    palette=category_colors
+    palette=category_colors_emition
 )
 ax2.set_title('Scatter Plot of NO2 vs CO Levels by Station (Peak Hours)')
 ax2.set_xlabel('NO2 (Normalized)')
 ax2.set_ylabel('CO (Normalized)')
 ax2.grid(True)
 st.pyplot(fig2)
+
+# Visualisasi Pie Chart
+st.subheader(f"Distribusi Kategori NO2 dan CO {year_filter} (Jam Sibuk)")
+fig3, ax3 = plt.subplots(figsize=(8, 8))
+scaled_emisi['Kategori'].value_counts().plot.pie(
+    autopct='%1.1f%%',
+    colors=[category_colors_emition[cat] for cat in scaled_emisi['Kategori'].value_counts().index],
+    ax=ax3
+)
+ax3.set_title('Distribution of NO2 & CO Categories')
+ax3.set_ylabel('')
+st.pyplot(fig3)
 
 # Informasi Tambahan
 st.subheader("Keterangan")
