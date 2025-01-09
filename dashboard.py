@@ -4,18 +4,18 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 
-aoti_df = pd.read_csv('PRSA_Data_Aotizhongxin_20130301-20170228.csv')
-chang_df = pd.read_csv('PRSA_Data_Changping_20130301-20170228.csv')
-ding_df = pd.read_csv('PRSA_Data_Dingling_20130301-20170228.csv')
-dong_df = pd.read_csv('PRSA_Data_Dongsi_20130301-20170228.csv')
-guan_df = pd.read_csv('PRSA_Data_Guanyuan_20130301-20170228.csv')
-guch_df = pd.read_csv('PRSA_Data_Gucheng_20130301-20170228.csv')
-huai_df = pd.read_csv('PRSA_Data_Huairou_20130301-20170228.csv')
-nong_df = pd.read_csv('PRSA_Data_Nongzhanguan_20130301-20170228.csv')
-shun_df = pd.read_csv('PRSA_Data_Shunyi_20130301-20170228.csv')
-tian_df = pd.read_csv('PRSA_Data_Tiantan_20130301-20170228.csv')
-wanl_df = pd.read_csv('PRSA_Data_Wanliu_20130301-20170228.csv')
-wans_df = pd.read_csv('PRSA_Data_Wanshouxigong_20130301-20170228.csv')
+aoti_df = pd.read_csv('Dataset/PRSA_Data_Aotizhongxin_20130301-20170228.csv')
+chang_df = pd.read_csv('Dataset/PRSA_Data_Changping_20130301-20170228.csv')
+ding_df = pd.read_csv('Dataset/PRSA_Data_Dingling_20130301-20170228.csv')
+dong_df = pd.read_csv('Dataset/PRSA_Data_Dongsi_20130301-20170228.csv')
+guan_df = pd.read_csv('Dataset/PRSA_Data_Guanyuan_20130301-20170228.csv')
+guch_df = pd.read_csv('Dataset/PRSA_Data_Gucheng_20130301-20170228.csv')
+huai_df = pd.read_csv('Dataset/PRSA_Data_Huairou_20130301-20170228.csv')
+nong_df = pd.read_csv('Dataset/PRSA_Data_Nongzhanguan_20130301-20170228.csv')
+shun_df = pd.read_csv('Dataset/PRSA_Data_Shunyi_20130301-20170228.csv')
+tian_df = pd.read_csv('Dataset/PRSA_Data_Tiantan_20130301-20170228.csv')
+wanl_df = pd.read_csv('Dataset/PRSA_Data_Wanliu_20130301-20170228.csv')
+wans_df = pd.read_csv('Dataset/PRSA_Data_Wanshouxigong_20130301-20170228.csv')
 
 merged_df = pd.concat([aoti_df, chang_df, guan_df, ding_df, dong_df, guch_df, huai_df, nong_df, shun_df,
                        tian_df, wanl_df, wans_df], ignore_index=True)
