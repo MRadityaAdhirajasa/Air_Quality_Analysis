@@ -9,11 +9,6 @@ Dataset terdiri dari data kualitas udara yang diambil dari beberapa stasiun di C
 - **Bagaimana pola konsentrasi PM2.5 selama musim dingin di berbagai stasiun dari tahun 2013-2017, dan bagaimana daerah-daerah tersebut dapat dikelompokkan berdasarkan tingkat polusi?**
 - **Bagaimana konsentrasi gas berbahaya (NO2 dan CO) di berbagai stasiun selama jam sibuk (7:00–9:00 dan 17:00–19:00) pada tahun 2016, dan bagaimana stasiun-stasiun tersebut dapat dikelompokkan berdasarkan tingkat emisi?**
 
-## Proses Pengolahan Data
-
-- **Bagaimana pola konsentrasi PM2.5 selama musim dingin di berbagai stasiun dari tahun 2013-2017, dan bagaimana daerah-daerah tersebut dapat dikelompokkan berdasarkan tingkat polusi?**
-- **Bagaimana konsentrasi gas berbahaya (NO2 dan CO) di berbagai stasiun selama jam sibuk (7:00–9:00 dan 17:00–19:00) pada tahun 2016, dan bagaimana stasiun-stasiun tersebut dapat dikelompokkan berdasarkan tingkat emisi?**
-
 ## Streamlit Dashboard
 
 Membuat dashboard di streamlit dan deploy di streamlit cloud
