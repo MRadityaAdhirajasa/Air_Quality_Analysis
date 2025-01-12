@@ -13,7 +13,7 @@ The dataset consists of air quality data taken from several stations in China. T
 
 Create dashboards using streamlit and deploy on streamlit cloud
 
-![image](https://github.com/user-attachments/assets/388f370b-3c1a-4c26-aab0-6bea01ee9dfa)
+![image](https://github.com/user-attachments/assets/600a8a17-fcb3-4c3d-8a19-c2e8631fb6be)
 
 ## Conclusion
 
