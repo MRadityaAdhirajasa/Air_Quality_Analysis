@@ -92,7 +92,7 @@ grouped_data.rename(columns={'PM2.5': 'avg_PM2.5'}, inplace=True)
 if not grouped_data.empty:
     max_pm25_station = grouped_data.loc[grouped_data['avg_PM2.5'].idxmax(), 'station']
     max_pm25_value = grouped_data['avg_PM2.5'].max()
-    st.markdown(f"- ## Highest PM2.5: {max_pm25_value:.2f} - {max_pm25_station} station")
+    st.markdown(f"- #### Highest PM2.5: {max_pm25_value:.2f} - {max_pm25_station} station")
 else:
     st.markdown("## There is no data for the selected year and season combination.")
 
