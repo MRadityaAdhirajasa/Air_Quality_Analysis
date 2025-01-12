@@ -56,7 +56,8 @@ def load_data():
     return merged_df
 
 # Muat data
-st.title("Analisis PM2.5 Berdasarkan Musim")
+st.title("Air Quality Analysis")
+st.markdown("---------------------------------------------------------------------------------------------------")
 data = load_data()
 
 # Sidebar untuk memilih filter
@@ -176,9 +177,9 @@ else:
     st.write("Tidak ada data untuk ditampilkan pada grafik garis.")
 
 #--------------------------------------------------------------------------------------------------------------
-
+st.markdown("---------------------------------------------------------------------------------------------------")
 # Muat data
-st.title("Analisis Emisi Udara NO2 dan CO")
+st.markdown("## Analisis Emisi Udara NO2 dan CO")
 data = load_data()
 
 # Filter data untuk tahun yang dipilih dan jam sibuk (7:00–9:00 dan 17:00–19:00)
