@@ -58,25 +58,26 @@ def load_data():
 # Muat data
 st.title("Air Quality Analysis")
 st.markdown("---------------------------------------------------------------------------------------------------")
+st.markdown("## PM2.5 Analysis by Season & Year")
 data = load_data()
 
 # Sidebar untuk memilih filter
 st.sidebar.header("Filter")
-year_options = ["Semua Tahun"] + sorted(data['datetime'].dt.year.unique().tolist())  # Tambahkan "Semua Tahun"
-year_filter = st.sidebar.selectbox("Pilih Tahun", year_options)
-season = st.sidebar.selectbox("Pilih Musim", ["Musim Semi", "Musim Panas", "Musim Gugur", "Musim Dingin"])
+year_options = ["All Years"] + sorted(data['datetime'].dt.year.unique().tolist())  # Tambahkan "Semua Tahun"
+year_filter = st.sidebar.selectbox("Select Year", year_options)
+season = st.sidebar.selectbox("Select Season", ["Spring", "Summer", "Autumn", "Winter"])
 
 # Filter data berdasarkan tahun dan musim
 def filter_by_year_and_season(data, year, season):
-    if year != "Semua Tahun": 
+    if year != "All Years": 
         data = data[data['datetime'].dt.year == year]
-    if season == "Musim Semi":
+    if season == "Spring":
         return data[data['datetime'].dt.month.isin([3, 4, 5])]
-    elif season == "Musim Panas":
+    elif season == "Summer":
         return data[data['datetime'].dt.month.isin([6, 7, 8])]
-    elif season == "Musim Gugur":
+    elif season == "Autumn":
         return data[data['datetime'].dt.month.isin([9, 10, 11])]
-    elif season == "Musim Dingin":
+    elif season == "Winter":
         return data[data['datetime'].dt.month.isin([12, 1, 2])]
 
 # Data yang difilter berdasarkan tahun dan musim
@@ -91,32 +92,32 @@ grouped_data.rename(columns={'PM2.5': 'avg_PM2.5'}, inplace=True)
 if not grouped_data.empty:
     max_pm25_station = grouped_data.loc[grouped_data['avg_PM2.5'].idxmax(), 'station']
     max_pm25_value = grouped_data['avg_PM2.5'].max()
-    st.markdown(f"## PM2.5 Tertinggi: {max_pm25_value:.2f} - Stasiun {max_pm25_station}")
+    st.markdown(f"## Highest PM2.5: {max_pm25_value:.2f} - {max_pm25_station} station")
 else:
-    st.markdown("## Tidak ada data untuk kombinasi tahun dan musim yang dipilih.")
+    st.markdown("## There is no data for the selected year and season combination.")
 
 # Klasifikasi kategori PM2.5
 def categorize(pm25):
     if pm25 < 60:
-        return "Rendah"
+        return "Low"
     elif 60 <= pm25 < 80:
-        return "Sedang"
+        return "Moderate"
     else:
-        return "Tinggi"
+        return "High"
 
 grouped_data['Kategori'] = grouped_data['avg_PM2.5'].apply(categorize)
 
 # Warna kategori
 def get_color(category):
-    if category == "Rendah":
+    if category == "Low":
         return "lightblue"
-    elif category == "Sedang":
+    elif category == "Moderate":
         return "blue"
-    elif category == "Tinggi":
+    elif category == "High":
         return "darkblue"
 
 # Barplot - Rata-rata PM2.5 per stasiun
-st.subheader(f"Rata-rata PM2.5 di Setiap Stasiun ({season} {year_filter})")
+st.subheader(f"Average PM2.5 at Each Station ({season} {year_filter})")
 fig1, ax1 = plt.subplots(figsize=(10, 6))
 if not grouped_data.empty:
     sns.barplot(
@@ -132,10 +133,10 @@ if not grouped_data.empty:
     plt.xticks(rotation=45, ha='right')
     st.pyplot(fig1)
 else:
-    st.write("Tidak ada data untuk ditampilkan pada grafik batang.")
+    st.write("There is no data to display on the bar graph.")
 
 # Pie Chart - Proporsi kategori PM2.5
-st.subheader(f"Proporsi Stasiun Berdasarkan Kategori PM2.5 ({season} {year_filter})")
+st.subheader(f"Proportion of Stations by PM2.5 Category ({season} {year_filter})")
 category_counts = grouped_data['Kategori'].value_counts()
 if not category_counts.empty:
     pie_colors = [get_color(cat) for cat in category_counts.index]
@@ -150,10 +151,10 @@ if not category_counts.empty:
     ax2.set_ylabel("")
     st.pyplot(fig2)
 else:
-    st.write("Tidak ada data untuk kategori yang tersedia.")
+    st.write("No data for the category is available.")
 
 # Line Chart - Tingkat Polusi PM2.5 Bulanan
-st.subheader(f"Tingkat Polusi PM2.5 Bulanan ({season})")
+st.subheader(f"Monthly PM2.5 Pollution Level ({season})")
 monthly_data = filtered_data.groupby('year_month')['PM2.5'].mean().reset_index()
 monthly_data['year_month'] = monthly_data['year_month'].dt.to_timestamp()
 
@@ -174,17 +175,17 @@ if not monthly_data.empty:
     ax3.set_xticklabels(monthly_data['year_month'].dt.strftime('%b %Y'), rotation=45, ha='right')
     st.pyplot(fig3)
 else:
-    st.write("Tidak ada data untuk ditampilkan pada grafik garis.")
+    st.write("There is no data to display on the line graph.")
 
 #--------------------------------------------------------------------------------------------------------------
 st.markdown("---------------------------------------------------------------------------------------------------")
 # Muat data
-st.markdown("## Analisis Emisi Udara NO2 dan CO")
+st.markdown("## NO2 and CO Air Emission Analysis")
 data = load_data()
 
 # Filter data untuk tahun yang dipilih dan jam sibuk (7:00–9:00 dan 17:00–19:00)
 filtered_emisi = data[
-    ((data['datetime'].dt.year == year_filter) if year_filter != "Semua Tahun" else True) &
+    ((data['datetime'].dt.year == year_filter) if year_filter != "All Years" else True) &
     (data['datetime'].dt.hour.isin([7, 8, 9, 17, 18, 19]))
 ]
 
@@ -199,11 +200,11 @@ scaled_emisi[['NO2', 'CO']] = scaler.fit_transform(aggregated_emisi[['NO2', 'CO'
 # Klasifikasi stasiun berdasarkan kategori emisi
 def classify_station(row):
     if row['NO2'] > 0.7 or row['CO'] > 0.7:
-        return 'Tinggi'
+        return 'High'
     elif row['NO2'] > 0.4 or row['CO'] > 0.4:
-        return 'Sedang'
+        return 'Moderate'
     else:
-        return 'Rendah'
+        return 'Low'
 
 scaled_emisi['Kategori'] = scaled_emisi.apply(classify_station, axis=1)
 
@@ -223,14 +224,14 @@ if not scaled_emisi.empty:
 
     # Menampilkan informasi
     st.markdown(f"""
-    - #### Stasiun dengan Emisi Tertinggi: {max_no2_station} & {max_co_station}
-    - #### Stasiun dengan Emisi Terendah: {min_no2_station} & {min_co_station}
+    - #### Station with the Highest Emissions: {max_no2_station} & {max_co_station}
+    - #### Station with the Lowest Emissions: {min_no2_station} & {min_co_station}
     """)
 else:
-    st.write("Tidak ada data emisi yang tersedia untuk ditampilkan.")
+    st.write("No emissions data is available for display.")
 
 # Visualisasi Heatmap
-st.subheader(f"Heatmap Tingkat NO2 dan CO per Stasiun {year_filter} (Jam Sibuk)")
+st.subheader(f"Heatmap of NO2 and CO Levels per Station {year_filter} (Peak Hours)")
 fig1, ax1 = plt.subplots(figsize=(12, 6))
 sns.heatmap(
     scaled_emisi.set_index('station')[['NO2', 'CO']], 
@@ -244,8 +245,8 @@ ax1.set_ylabel('Stations')
 st.pyplot(fig1)
 
 # Visualisasi Scatter Plot
-category_colors_emition = {'Rendah': 'blue', 'Sedang': 'orange', 'Tinggi': 'red'}
-st.subheader(f"Scatter Plot NO2 vs CO {year_filter} (Jam Sibuk)")
+category_colors_emition = {'Low': 'blue', 'Moderate': 'orange', 'High': 'red'}
+st.subheader(f"Scatter Plot NO2 vs CO {year_filter} (Peak Hours)")
 fig2, ax2 = plt.subplots(figsize=(10, 6))
 sns.scatterplot(
     data=scaled_emisi, 
@@ -264,7 +265,7 @@ ax2.grid(True)
 st.pyplot(fig2)
 
 # Visualisasi Pie Chart
-st.subheader(f"Distribusi Kategori NO2 dan CO {year_filter} (Jam Sibuk)")
+st.subheader(f"Distribution Category of NO2 & CO {year_filter} (Peak Hours)")
 fig3, ax3 = plt.subplots(figsize=(8, 8))
 scaled_emisi['Kategori'].value_counts().plot.pie(
     autopct='%1.1f%%',
@@ -276,15 +277,15 @@ ax3.set_ylabel('')
 st.pyplot(fig3)
 
 # Informasi Tambahan
-st.subheader("Keterangan")
+st.subheader("Legend")
 st.markdown("""
 #### PM2.5
-- **Tinggi**: PM2.5 >= 80  
-- **Sedang**: 60 <= PM2.5 < 80  
-- **Rendah**: PM2.5 < 60
-#### Emisi
-- **Tinggi**: NO2 > 0.7 atau CO > 0.7  
-- **Sedang**: NO2 > 0.4 atau CO > 0.4  
-- **Rendah**: NO2 <= 0.4 dan CO <= 0.4
-- **Jam Sibuk**: 7-9 AM & 5-7 PM
+- **High**: PM2.5 >= 80  
+- **Moderate**: 60 <= PM2.5 < 80  
+- **Low**: PM2.5 < 60
+#### Emission
+- **High**: NO2 > 0.7 or CO > 0.7  
+- **Moderate**: NO2 > 0.4 or CO > 0.4  
+- **Low**: NO2 <= 0.4 and CO <= 0.4
+- **Peak Hours**: 7-9 AM & 5-7 PM
 """)
