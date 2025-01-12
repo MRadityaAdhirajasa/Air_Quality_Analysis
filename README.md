@@ -2,24 +2,24 @@
 
 ## Dataset
 
-Dataset terdiri dari data kualitas udara yang diambil dari beberapa stasiun di China. Data mencakup informasi seperti konsentrasi PM2.5, PM10, SO2, NO2, CO, O3, suhu, tekanan, curah hujan, dan kecepatan angin, serta waktu dan lokasi pengambilan sampel.
+The dataset consists of air quality data taken from several stations in China. The data includes information such as concentrations of PM2.5, PM10, SO2, NO2, CO, O3, temperature, pressure, precipitation, and wind speed, as well as sampling time and location.
 
 ## Pertanyaan Bisnis
 
-- **Bagaimana pola konsentrasi PM2.5 selama musim dingin di berbagai stasiun dari tahun 2013-2017, dan bagaimana daerah-daerah tersebut dapat dikelompokkan berdasarkan tingkat polusi?**
-- **Bagaimana konsentrasi gas berbahaya (NO2 dan CO) di berbagai stasiun selama jam sibuk (7:00–9:00 dan 17:00–19:00) pada tahun 2016, dan bagaimana stasiun-stasiun tersebut dapat dikelompokkan berdasarkan tingkat emisi?**
+- **What is the pattern of PM2.5 concentrations during winter at various stations from 2013-2017, and how can these areas be categorized based on pollution levels?**
+- **What were the concentrations of harmful gases (NO2 and CO) at various stations during peak hours (7:00-9:00 and 17:00-19:00) in 2016, and how can the stations be categorized by emission levels?**
 
 ## Streamlit Dashboard
 
-Membuat dashboard di streamlit dan deploy di streamlit cloud
+Create dashboards using streamlit and deploy on streamlit cloud
 
 ![image](https://github.com/user-attachments/assets/388f370b-3c1a-4c26-aab0-6bea01ee9dfa)
 
 ## Conclusion
 
-- Selama musim panas dari tahun 2013 hingga 2015, konsentrasi PM2.5 menunjukkan variasi yang cukup signifikan di berbagai stasiun. 75% dari stasiun tergolong dalam tingkat polusi sedang, sementara sisanya berada dalam kategori rendah. Stasiun **Changping**, **Dingling**, dan **Huairou** mencatat rata-rata polusi PM2.5 terendah, menjadikannya daerah dengan kualitas udara yang relatif lebih baik selama musim panas. Sebaliknya, stasiun **Guanyuan**, **Tiantan**, dan **Wanliu** memiliki rata-rata polusi PM2.5 tertinggi, meskipun nilai tersebut masih berada dalam kategori tingkat polusi sedang. Puncak polusi tertinggi pada musim panas tercatat pada Juni 2013, sedangkan polusi terendah terjadi pada Agustus 2015, menunjukkan adanya fluktuasi tahunan. Pola ini mencerminkan bahwa meskipun ada perbedaan antarstasiun, mayoritas wilayah masih menunjukkan tingkat polusi yang tidak terlalu ekstrem, tetapi tetap perlu diperhatikan untuk menjaga kualitas udara tetap baik.
+- During the summer season from 2013 to 2015, PM2.5 concentrations showed significant variations across stations. 75% of the stations belonged to moderate pollution levels, while the rest were in the low category. The **Changping**, **Dingling**, and **Huairou** stations recorded the lowest average PM2.5 pollution, making them areas with relatively better air quality during summer. In contrast, stations **Guanyuan**, **Tiantan**, and **Wanliu** had the highest average PM2.5 pollution, although these values still fall within the moderate pollution level category. The highest pollution peak in summer was recorded in June 2013, while the lowest pollution occurred in August 2015, indicating annual fluctuations. This pattern reflects that while there are differences between stations, the majority of areas still show less extreme pollution levels, but still need to be considered to maintain good air quality.
 
-- Pada jam sibuk tahun 2016, 75% stasiun memiliki emisi NO2 & CO yang tinggi, sementara hanya 8.3% yang rendah. **Dingling** dan **Huairou** tercatat dengan emisi terendah, sedangkan **Shunyi** berada pada tingkat sedang. Ada korelasi positif antara NO2 dan CO, di mana peningkatan salah satu gas diikuti oleh gas lainnya. Meskipun mayoritas stasiun menunjukkan emisi tinggi, beberapa stasiun tetap rendah meski pada jam sibuk, mencerminkan perbedaan kondisi lingkungan atau aktivitas di sekitarnya.
+- In 2016 peak hours, 75% of stations had high NO2 & CO emissions, while only 8.3% were low. **Dingling** and **Huairou** were recorded with the lowest emissions, while **Shunyi** was at a medium level. There is a positive correlation between NO2 and CO, where an increase in one of the gases is followed by the other. While the majority of stations showed high emissions, some stations remained low even during peak hours, reflecting differences in environmental conditions or surrounding activities.
 
 ## Link
 
