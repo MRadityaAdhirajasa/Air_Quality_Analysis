@@ -4,7 +4,7 @@
 
 The dataset consists of air quality data taken from several stations in China. The data includes information such as concentrations of PM2.5, PM10, SO2, NO2, CO, O3, temperature, pressure, precipitation, and wind speed, as well as sampling time and location.
 
-## Pertanyaan Bisnis
+## Question
 
 - **What is the pattern of PM2.5 concentrations during winter at various stations from 2013-2017, and how can these areas be categorized based on pollution levels?**
 - **What were the concentrations of harmful gases (NO2 and CO) at various stations during peak hours (7:00-9:00 and 17:00-19:00) in 2016, and how can the stations be categorized by emission levels?**
